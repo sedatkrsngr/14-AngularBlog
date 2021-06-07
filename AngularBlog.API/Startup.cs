@@ -1,11 +1,10 @@
+using AngularBlog.API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -24,6 +23,18 @@ namespace AngularBlog.API
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(opts =>
+            {
+                opts.AddDefaultPolicy(x =>
+                {
+                    x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                });
+            });
+
+            services.AddDbContext<BlogDbContext>(opts =>
+            {
+                opts.UseSqlServer(Configuration["ConnectionStrings:Str"]);
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -41,6 +52,7 @@ namespace AngularBlog.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularBlog.API v1"));
             }
 
+            app.UseCors();
             app.UseHttpsRedirection();
 
             app.UseRouting();
