@@ -9,6 +9,9 @@ import { AboutMeComponent } from './pages/about-me/about-me.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MainLayoutComponent } from './layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
+import { HeaderNavComponent } from './navigations/header-nav/header-nav.component';
+import { AdminHeaderNavComponent } from './navigations/admin-header-nav/admin-header-nav.component';
+import { FooterNavComponent } from './navigations/footer-nav/footer-nav.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.compone
     AboutMeComponent,
     ContactComponent,
     MainLayoutComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    HeaderNavComponent,
+    AdminHeaderNavComponent,
+    FooterNavComponent
   ],
   imports: [
     BrowserModule,

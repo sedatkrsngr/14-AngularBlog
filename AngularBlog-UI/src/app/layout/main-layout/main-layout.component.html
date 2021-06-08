@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<app-header-nav></app-header-nav><!--header-nav içerisinde tanımladığımız headerı main-layotun içinde göstermek için buraya ekledik-->
+
+<div class="container" style="margin-bottom: 50px;">
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <router-outlet></router-outlet><!--routing yapısı çalışsın diye ekledik-->
+    </div>
+    <div class="col-md-4 ">
+
+    </div>
+  </div>
+</div>
+
+<app-footer-nav></app-footer-nav><!--Footer-->
