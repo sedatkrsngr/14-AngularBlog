@@ -27,7 +27,7 @@ namespace AngularBlog.API
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy", builder =>
                 {
-                    builder.WithOrigins("https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();//UI url       
+                    builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();//UI url       
                 });
             });
             services.AddDbContext<BlogDbContext>(opts =>
