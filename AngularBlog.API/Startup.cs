@@ -23,14 +23,13 @@ namespace AngularBlog.API
         public IConfiguration Configuration { get; }
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(opts =>
-            {
-                opts.AddDefaultPolicy(x =>
+          
+            services.AddCors(opt => {
+                opt.AddPolicy("CorsPolicy", builder =>
                 {
-                    x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+                    builder.WithOrigins("https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials();//UI url       
                 });
             });
-
             services.AddDbContext<BlogDbContext>(opts =>
             {
                 opts.UseSqlServer(Configuration["ConnectionStrings:Str"]);
@@ -52,7 +51,7 @@ namespace AngularBlog.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularBlog.API v1"));
             }
 
-            app.UseCors();
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
 
             app.UseRouting();
