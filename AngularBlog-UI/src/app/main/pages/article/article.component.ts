@@ -19,6 +19,7 @@ export class ArticleComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
+      this.articleService.loading = true;
       let id = Number(this.route.snapshot.paramMap.get('id')); //Anlık olarak gideceğimiz linkin içindeki id değerini alır. Title değeri de var ama o bizi ilgilendirmiyor
       this.articleService.getArticle(id).subscribe(data=>{
         this.article = data;
