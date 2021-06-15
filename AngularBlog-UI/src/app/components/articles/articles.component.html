@@ -1,0 +1,124 @@
+<div *ngIf="articleService.loading"><!--articles.component içerisinde değişken değil de constructorda kullanıldığı için contructorda public olarak kullanıldı-->
+  <main *ngFor="let item of createRange()" class="page mb-2">
+    <!-- Title -->
+
+    <!-- Content -->
+    <div class="page-content"><!--Bu aslında sayfanın yüklenirken nasıl görüneceğinin loading versiyonu-->
+      <!-- Placeholder Content -->
+      <div class="placeholder-content">
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+        <div class="placeholder-content_item"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div *ngIf="articles.length > 0; else emptyTemplate">
+  <!--dikkat edersek en aşağıdaki pagination-controls burada | işaretinden sonra paginate ait olan değerlerle oluşturulur-->
+  <div
+    *ngFor="
+      let item of articles
+        | paginate
+          : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: totalCount
+            }
+    "
+  >
+    <!--ngTemplateOutlet ile hangi template kullanacağımız belirliyoruz context ile de template içerisindeki değerleri doldururuz-->
+    <ng-container
+      *ngTemplateOutlet="
+        horizontalTemplate;
+        context: {
+          id: item.id,
+          commentCount: item.commentCount,
+          viewCount: item.viewCount,
+          categoryName: item.category.name,
+          publishDate: item.publishDate,
+          contentSummary: item.contentSummary,
+          title: item.title,
+          picture: item.picture
+        }
+      "
+    ></ng-container>
+  </div>
+</div>
+<ng-template #emptyTemplate
+  ><!--Yukarıdaki şarta göre veri şartını sağlamazsa burası çalışır-->
+  <div *ngIf="!articleService.loading" class="alert alert-danger" role="alert">Makale bulunamadı....</div><!--Loading Ekranı Çıktığı sürece bu arkadaş görünmeyecek-->
+</ng-template>
+
+<!--ng-template içerisindeki değerler kullanıldığı ng-conteiner tarafından #horizontalTemplate anahtarı ile verilince dolacaktır. Buna göre de ng-template içindeki divler de bu şekilde dolacaktır-->
+<ng-template
+  #horizontalTemplate
+  let-id="id"
+  let-commentCount="commentCount"
+  let-viewCount="viewCount"
+  let-categoryName="categoryName"
+  let-publishDate="publishDate"
+  let-contentSummary="contentSummary"
+  let-title="title"
+  let-picture="picture"
+>
+  <div class="card bg-light border-primary mb-2">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <img [src]="picture || default_article" class="card-img" /><!--Eğer resim boş gelirse article.component.ts de yolunu verdiğimiz default_article gelsin-->
+        </div>
+        <div class="col-md-8">
+          <h5 class="card-title">{{ title }}</h5>
+          <!--köşeli parantezlerin içindeki değer normalde componentten gelir ama burada  kullanıldığı ng-templateden gelmekte aşağıdaki hepsi öyle-->
+          <p class="card-text">{{ contentSummary }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer bg-transparent border-primary">
+      <span class="badge badge-pill badge-dark">
+        <i class="fa fa-calendar"></i> {{ publishDate | date: "dd.MM.yyyy" }} <!--Tarihi böyle formatlıyoruz-->
+      </span>
+      <span class="mr-1"></span>
+      <span class="badge badge-pill badge-success">
+        <i class="fa fa-folder"></i> {{ categoryName }}
+      </span>
+      <span class="mr-1"></span>
+      <span class="badge badge-pill badge-success">
+        <i class="fa fa-eye"></i> {{ viewCount }}
+      </span>
+      <span class="mr-1"></span>
+
+      <span class="badge badge-pill badge-primary">
+        <i class="fa fa-comment"></i> {{ commentCount }}
+      </span>
+
+      <!--localhost:4200/makale/id-->
+      <!--urlformat ismi pipes->name den gelmekte. Başlangıçta app.module içerisine eklendi fakat. component module tarafına articlesde kullıldığı için eklendi. exports kısmında da eklendi çünkü birden fazla yerde kullanılacaktır-->
+      <a
+        [routerLink]="['/makale', title | urlFormat ,id]"
+        class="btn btn-primary btn-sm float-right"
+      >
+        devamını oku
+      </a>
+    </div>
+  </div>
+</ng-template>
+
+<!--ngx-pagination kütüphanesi butonlarını aşağıdaki gibi oluşturuyoruz-->
+<!--pageChanged articles içinde oluşturduğumuz bir methodtur. Event ise gelecek number sayılar temsil eder adı event olmak zorundadır-->
+<!--Toplam datamız 1 sayfada çıkan maks elementten fazla ise butonlar çıksın-->
+<pagination-controls
+  *ngIf="totalCount > pageSize"
+  (pageChange)="pageChanged($event)"
+  previousLabel="geri"
+  nextLabel="ileri"
+></pagination-controls>
