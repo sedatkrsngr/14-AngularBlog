@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AngularBlog.API.Models;
 using AngularBlog.API.Dtos;
+using System.Threading;
 
 namespace AngularBlog.API.Controllers
 {
@@ -26,7 +27,6 @@ namespace AngularBlog.API.Controllers
         [HttpGet("{page}/{pageSize}")]
         public ActionResult GetArticle(int page = 1, int pageSize = 5)
         {
-
             try
             {
                 IQueryable<Article> query;
@@ -76,20 +76,34 @@ namespace AngularBlog.API.Controllers
         {
             return await _context.Article.ToListAsync();
         }
-      
+
 
         // GET: api/Articles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Article>> GetArticle(int id)
         {
-            var article = await _context.Article.FindAsync(id);
+            var article = await _context.Article.Include(x => x.Category).Include(y => y.Comment).FirstOrDefaultAsync(z => z.Id == id);
 
             if (article == null)
             {
                 return NotFound();
             }
+            ArticleResponse articleResponse = new ArticleResponse()
+            {
+                Id = article.Id,
+                Title = article.Title,
+                ContentMain = article.ContentMain,
+                ContentSummary = article.ContentSummary,
+                Picture = article.Picture,
+                PublishDate = article.PublishDate,
+                ViewCount = article.ViewCount,
+                Category = new CategoryResponse() { Id = article.Category.Id, Name = article.Category.Name },
+                CommentCount = article.Comment.Count
 
-            return article;
+            };
+          
+
+            return Ok(articleResponse);
         }
 
         // PUT: api/Articles/5
