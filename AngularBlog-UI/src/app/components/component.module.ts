@@ -5,12 +5,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { MenuCategoryComponent } from './menu-category/menu-category.component';
 import { ArticlesComponent } from './articles/articles.component'; //sayfalama butonları için eklendi. Article sayfalama işlemleri için kullanacağız
+import { UrlFormatPipe } from '../pipes/url-format.pipe';
 
 
 @NgModule({
-  declarations: [MenuCategoryComponent, ArticlesComponent],
+  declarations: [MenuCategoryComponent, ArticlesComponent,UrlFormatPipe],
   imports: [CommonModule, RouterModule, NgxPaginationModule],
-  exports: [MenuCategoryComponent,ArticlesComponent], //başka yerlerde bu componentin kullanılması için export etmek gerekiyor. Ortak yapılar Articles Search,Home,Kategory işlemlerinde kullanılacak
+  exports: [MenuCategoryComponent, ArticlesComponent,UrlFormatPipe], //başka yerlerde bu componentin kullanılması için export etmek gerekiyor. Ortak yapılar Articles Search,Home,Kategory işlemlerinde kullanılacak
 })
 export class ComponentModule {}
 

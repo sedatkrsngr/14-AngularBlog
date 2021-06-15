@@ -102,8 +102,9 @@
       </span>
 
       <!--localhost:4200/makale/id-->
+      <!--urlformat ismi pipes->name den gelmekte. Başlangıçta app.module içerisine eklendi fakat. component module tarafına articlesde kullıldığı için eklendi. exports kısmında da eklendi çünkü birden fazla yerde kullanılacaktır-->
       <a
-        [routerLink]="['/makale', id]"
+        [routerLink]="['/makale', title | urlFormat ,id]"
         class="btn btn-primary btn-sm float-right"
       >
         devamını oku

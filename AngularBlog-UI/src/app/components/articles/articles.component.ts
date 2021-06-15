@@ -22,7 +22,7 @@ export class ArticlesComponent implements OnInit {
     public articleService: ArticleService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {//sayfa yüklenildiğinde de loading çalışssın
     this.articleService.loading = true;
   }
 

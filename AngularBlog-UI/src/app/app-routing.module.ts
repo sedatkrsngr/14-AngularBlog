@@ -22,7 +22,7 @@ const routes: Routes = [
         component: HomeComponent,
       },
       {
-        path: 'makale/:id',//:id dinamik değerden gelecek demek
+        path: 'makale/:title/:id',//:id ve title dinamik değerden gelecek demek daha düzgün bir link görünümü olur
         component: ArticleComponent,
       },
       {
