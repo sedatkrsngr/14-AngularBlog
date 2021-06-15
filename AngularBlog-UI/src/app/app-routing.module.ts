@@ -6,6 +6,7 @@ import { AboutMeComponent } from './main/pages/about-me/about-me.component';
 import { ContactComponent } from './main/pages/contact/contact.component';
 import { MainLayoutComponent } from './main/layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
+import { ArticleComponent } from './main/pages/article/article.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,14 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent,
+      },
+      {
+        path: 'sayfa/:page',//:page dinamik değerden gelecek demek
+        component: HomeComponent,
+      },
+      {
+        path: 'makale/:id',//:id dinamik değerden gelecek demek
+        component: ArticleComponent,
       },
       {
         path: 'hakkimizda',
