@@ -13,6 +13,7 @@ import { HeaderNavComponent } from './navigations/header-nav/header-nav.componen
 import { FooterNavComponent } from './navigations/footer-nav/footer-nav.component';
 import { ArticleComponent } from './pages/article/article.component';
 import { UrlFormatPipe } from '../pipes/url-format.pipe';
+import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UrlFormatPipe } from '../pipes/url-format.pipe';
     MainLayoutComponent,
     HeaderNavComponent,
     FooterNavComponent,
-    ArticleComponent
+    ArticleComponent,
+    CategoryArticlesComponent
   ],
   imports: [
     CommonModule,

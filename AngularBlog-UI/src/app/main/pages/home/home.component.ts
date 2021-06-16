@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { ArticleService } from 'src/app/services/article.service';
-import { Router, ActivatedRoute } from '@angular/router'; //sayfalama için gerekli
+import { ActivatedRoute } from '@angular/router'; //sayfalama için gerekli
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit,OnDestroy {
 
   constructor(
     private articleService: ArticleService,
-    private router: Router,
     private route: ActivatedRoute
   ) {}
 

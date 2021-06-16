@@ -30,4 +30,13 @@ export class ArticleService {
       })
     );;
   }
+
+  getArticlesWithCategory(categoryId: number, page: number, pageSize: number) {
+        let url = `${this.apiUrl}/GetArticlesWithCategory/${categoryId}/${page}/${pageSize}`;
+        return this.apiClient.get<ArticlePagenation>(url).pipe(
+          tap((x) => {
+            this.loading = false; //veri gelirse loading dursun
+          })
+        );
+  }
 }

@@ -1,5 +1,12 @@
-<app-articles [totalCount]="totalCount" [articles]="articles" [page]="page" [pageSize]="pageSize" [loadingItem]="loadingItem"></app-articles>
-<br>
-<br>
+<app-articles
+  [totalCount]="totalCount"
+  [articles]="articles"
+  [page]="page"
+  [pageSize]="pageSize"
+  [loadingItem]="loadingItem"
+  [typeList]="'home'"
+></app-articles>
+<br />
+<br />
 <!--Yukarıda home içerisindeki değerleri articles.componente gönderiyoruz-->
-
+<!--sayfalama yaptığımızda hangi safa için sayfalama yapacaksak ona göre typeList değerini gönderiyoruz. Kendi ürettiğimiz bir tanım-->
