@@ -52,6 +52,7 @@ namespace AngularBlog.API
             }
 
             app.UseCors("CorsPolicy");
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseRouting();
