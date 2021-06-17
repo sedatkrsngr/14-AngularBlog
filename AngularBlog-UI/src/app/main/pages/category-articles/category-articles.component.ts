@@ -27,15 +27,23 @@ export class CategoryArticlesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.articleService.loading = true;
-      this.articles = [];
-      this.totalCount = 0;
       if (params.get('id')) {
         this.categoryId = Number(params.get('id')); //url de id varsa categoryID ye ata
       }
       if (params.get('page')) {
         this.page = Number(params.get('page'));
       }
-      this.articleService.getArticlesWithCategory(this.categoryId,this.page,this.pageSize).subscribe((data) => {
+      if (this.totalCount > 0) {
+        if (this.totalCount >= this.page * this.pageSize) {
+          this.loadingItem = 5;
+        }
+        else{//2*5-8+1=3  ilk sayfa 5 2. sayfa 3
+          this.loadingItem=(this.page*this.pageSize)-this.totalCount+1;//bu şekilde tüm sayfalar dolduktan sonra en son sayfada kalacak olan data sayısını bilebilirim
+        }
+      }
+      this.articles = [];
+      this.totalCount = 0;
+      this.subscription=this.articleService.getArticlesWithCategory(this.categoryId,this.page,this.pageSize).subscribe((data) => {
         this.articles = data.articles;
         this.totalCount=data.totalCount;
       });
