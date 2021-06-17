@@ -4,17 +4,16 @@ import { CategoryService } from '../../services/category.service';
 @Component({
   selector: 'app-menu-category',
   templateUrl: './menu-category.component.html',
-  styleUrls: ['./menu-category.component.css']
+  styleUrls: ['./menu-category.component.css'],
 })
 export class MenuCategoryComponent implements OnInit {
-
-  categories:Category[]=[];
-  constructor(private categoryService:CategoryService) { }
+  categories: Category[] = [];
+  constructor(public categoryService: CategoryService) {}
 
   ngOnInit(): void {
-  this.categoryService.getCategories().subscribe(data=>{
-    this.categories=data;
-  });
+    this.categoryService.loading = true;
+    this.categoryService.getCategories().subscribe((data) => {
+      this.categories = data;
+    });
   }
-
 }

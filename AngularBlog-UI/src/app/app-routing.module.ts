@@ -7,6 +7,7 @@ import { ContactComponent } from './main/pages/contact/contact.component';
 import { MainLayoutComponent } from './main/layout/main-layout/main-layout.component';
 import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
 import { ArticleComponent } from './main/pages/article/article.component';
+import { CategoryArticlesComponent } from './main/pages/category-articles/category-articles.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,14 @@ const routes: Routes = [
       {
         path: 'makale/:title/:id',//:id ve title dinamik değerden gelecek demek daha düzgün bir link görünümü olur
         component: ArticleComponent,
+      },
+      {
+        path: 'kategori/:name/:id',//:id ve title dinamik değerden gelecek demek daha düzgün bir link görünümü olur
+        component: CategoryArticlesComponent,
+      },
+      {
+        path: 'kategori/:name/:id/sayfa/:page',//kategori/:name/:id ye göre gelen veri articles içerisindeki sayfalamayla geleceği için sayfa butonlarına bastığımızda bu şekilde bir sayfa gelmesini witc case ile sağladık. Routing tarafını da burada belirledik
+        component: CategoryArticlesComponent,
       },
       {
         path: 'hakkimizda',
