@@ -23,7 +23,6 @@ export class ArticleComponent implements OnInit {
       let id = Number(this.route.snapshot.paramMap.get('id')); //Anlık olarak gideceğimiz linkin içindeki id değerini alır. Title değeri de var ama o bizi ilgilendirmiyor
       this.articleService.getArticle(id).subscribe(data=>{
         this.article = data;
-        console.log(data);
         this.category = data.category;
       });
     });

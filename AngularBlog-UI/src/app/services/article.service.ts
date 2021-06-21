@@ -49,6 +49,14 @@ export class ArticleService {
     );
   }
 
+  getArticlesMostView() {
+    let url = `${this.apiUrl}/GetArticlesByMostView`;
+    return this.apiClient.get<Article[]>(url).pipe(
+      tap(x => {
+        this.loading = false;
+      })
+    );
+  }
 }
 
 
