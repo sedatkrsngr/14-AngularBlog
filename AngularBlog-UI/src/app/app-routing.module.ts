@@ -8,6 +8,7 @@ import { MainLayoutComponent } from './main/layout/main-layout/main-layout.compo
 import { AdminLayoutComponent } from './admin/layout/admin-layout/admin-layout.component';
 import { ArticleComponent } from './main/pages/article/article.component';
 import { CategoryArticlesComponent } from './main/pages/category-articles/category-articles.component';
+import { SearchComponent } from './main/pages/search/search.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
       {
         path: 'kategori/:name/:id/sayfa/:page',//kategori/:name/:id ye göre gelen veri articles içerisindeki sayfalamayla geleceği için sayfa butonlarına bastığımızda bu şekilde bir sayfa gelmesini witc case ile sağladık. Routing tarafını da burada belirledik
         component: CategoryArticlesComponent,
+      },
+      {
+        path: 'arama/sayfa/:page',//arama queryString üzerinden yakalayacağız o yüzden page dışında dinamik değişken tanımlamaya gerek yok
+        component: SearchComponent, //örn www.mysite.com/arama/sayfa/1?s=asp-net
       },
       {
         path: 'hakkimizda',

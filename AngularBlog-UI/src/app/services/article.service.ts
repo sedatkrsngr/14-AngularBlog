@@ -39,4 +39,16 @@ export class ArticleService {
           })
         );
   }
+  getSearchArticles(searchText: string, page: number, pageSize: number) {
+    let url = `${this.apiUrl}/SearchArticles/${searchText}/${page}/${pageSize}`;
+
+    return this.apiClient.get<ArticlePagenation>(url).pipe(
+      tap(x => {
+        this.loading = false;
+      })
+    );
+  }
+
 }
+
+

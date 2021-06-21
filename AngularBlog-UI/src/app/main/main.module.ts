@@ -14,6 +14,7 @@ import { FooterNavComponent } from './navigations/footer-nav/footer-nav.componen
 import { ArticleComponent } from './pages/article/article.component';
 import { UrlFormatPipe } from '../pipes/url-format.pipe';
 import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CategoryArticlesComponent } from './pages/category-articles/category-ar
     HeaderNavComponent,
     FooterNavComponent,
     ArticleComponent,
-    CategoryArticlesComponent
+    CategoryArticlesComponent,
+    SearchComponent
   ],
   imports: [
     CommonModule,
