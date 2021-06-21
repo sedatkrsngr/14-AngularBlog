@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'rxjs/operators';
 import { Contact } from '../models/contact';
 
 @Injectable({
@@ -11,7 +12,11 @@ export class HelperService {
   constructor(private apiClient: HttpClient) {}
 
   sendContactEmail(contact:Contact){
-    return this.apiClient.post(`${this.apiUrl}/SendContactEmail`,contact);
+    return this.apiClient.post(`${this.apiUrl}/SendContactEmail`,contact).pipe(
+      tap((x) => {
+        this.loading = false; //veri gelirse loading dursun
+      })
+    );
   }
 }
 

@@ -16,7 +16,7 @@ export class CategoryService {
       tap((x) => {
         this.loading = false; //veri gelirse loading dursun
       })
-    );;;
+    );
   }
   public getCategoryById(id: number) {
     let url = `${this.apiUrl}/${id}`;
@@ -24,6 +24,6 @@ export class CategoryService {
       tap((x) => {
         this.loading = false; //veri gelirse loading dursun
       })
-    );;
+    );
   }
 }
