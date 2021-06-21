@@ -80,4 +80,9 @@ export class ArticleService {
       })
     );
   }
+
+  ArticleViewCountUp(id:number){//sayfa görüntülenmesi
+    let api = `${this.apiUrl}/ArticleViewCountUp/${id}`;
+    return this.apiClient.get(api);
+  }
 }
