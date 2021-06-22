@@ -195,14 +195,15 @@ namespace AngularBlog.API.Controllers
         [Route("GetArticlesArchive")]
         public IActionResult GetArticlesArchive()
         {
-            Thread.Sleep(1000);
+            var culture = CultureInfo.CreateSpecificCulture("tr-TR");
+            System.Threading.Thread.Sleep(1000);
             var query = _context.Article.GroupBy(x => new { x.PublishDate.Year, x.PublishDate.Month }).Select(y =>
                  new
                  {
                      year = y.Key.Year,
                      month = y.Key.Month,
                      count = y.Count(),
-                     monthName = new DateTime(y.Key.Year, y.Key.Month, 1).ToString("MMMM", CultureInfo.CreateSpecificCulture("tr"))
+                     monthName = new DateTime(y.Key.Year, y.Key.Month, 1).ToString("MMMM", culture)
                  });
 
             return Ok(query);
