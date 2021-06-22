@@ -10,6 +10,12 @@ import { ArticleComponent } from './main/pages/article/article.component';
 import { CategoryArticlesComponent } from './main/pages/category-articles/category-articles.component';
 import { SearchComponent } from './main/pages/search/search.component';
 import { ArchiveComponent } from './main/pages/archive/archive.component';
+import { AdminHomeComponent } from './admin/pages/admin-home/admin-home.component';
+import { ArticleAddComponent } from './admin/pages/article/article-add/article-add.component';
+import { ArticleListComponent } from './admin/pages/article/article-list/article-list.component';
+import { ArticleUpdateComponent } from './admin/pages/article/article-update/article-update.component';
+import { AdminArticleComponent } from './admin/pages/article/admin-article/admin-article.component';
+
 
 const routes: Routes = [
   {
@@ -62,7 +68,35 @@ const routes: Routes = [
     //www.mysite.com/admin
     path: 'admin',
     component: AdminLayoutComponent,
-    children: [],
+    children: [
+      {
+        path: '',
+        component: AdminHomeComponent,
+      },
+      {
+        path: 'Anasayfa',
+        component: AdminHomeComponent,
+      },
+      //admin/makale/.. olacağından makale için de childrenlar olacak
+      {
+        path: 'makale',
+        component: AdminArticleComponent,
+        children:[
+          {
+            path: 'ekle',
+            component: ArticleAddComponent,
+          },
+          {
+            path: 'listele',
+            component: ArticleListComponent,
+          },
+          {
+            path: 'güncelle/:id',
+            component: ArticleUpdateComponent,
+          },
+        ]
+      },
+    ],
   },
 ];
 

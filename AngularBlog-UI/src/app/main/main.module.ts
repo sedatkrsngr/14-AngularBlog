@@ -39,7 +39,7 @@ import { ArchiveComponent } from './pages/archive/archive.component';
     ComponentModule,
     MaterialModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], //html selector içerisinde custom tanımlar kullanıyorsak bunu eklemeliyiz. Öylesine ekledim şimdilik
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //html selector içerisinde custom tanımlar kullanıyorsak bunu eklemeliyiz.
 })
 export class MainModule {}
 
