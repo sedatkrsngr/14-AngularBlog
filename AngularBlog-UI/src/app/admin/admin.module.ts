@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
-import { MaterialModule } from '../modules/material/material.module';//materiali contect için kullanacağımızdan buraya eklemek mantıklı geldi. NErede kullanacaksak oranın modulüne ekleyebiliriz
-import { ComponentModule } from '../components/component.module';//bu module sayfalarımızda kullanıldığı için buraya ekliyoruz component.module->admin.module->app.module
-
+import { MaterialModule } from '../modules/material/material.module'; //materiali contect için kullanacağımızdan buraya eklemek mantıklı geldi. NErede kullanacaksak oranın modulüne ekleyebiliriz
+import { ComponentModule } from '../components/component.module'; //bu module sayfalarımızda kullanıldığı için buraya ekliyoruz component.module->admin.module->app.module
 
 import { AdminLayoutComponent } from './layout/admin-layout/admin-layout.component';
 import { AdminHeaderNavComponent } from './navigations/admin-header-nav/admin-header-nav.component';
@@ -17,8 +16,6 @@ import { ArticleUpdateComponent } from './pages/article/article-update/article-u
 import { ArticleListComponent } from './pages/article/article-list/article-list.component';
 import { AdminArticleComponent } from './pages/article/admin-article/admin-article.component';
 
-
-
 @NgModule({
   declarations: [
     AdminLayoutComponent,
@@ -28,9 +25,16 @@ import { AdminArticleComponent } from './pages/article/admin-article/admin-artic
     ArticleAddComponent,
     ArticleUpdateComponent,
     ArticleListComponent,
-    AdminArticleComponent],
+    AdminArticleComponent,
+  ],
   imports: [
-    CommonModule,BrowserModule, AppRoutingModule,HttpClientModule,ComponentModule,MaterialModule
-  ]
+    CommonModule,
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ComponentModule,
+    MaterialModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA], //html de değişkenler kullanıldığında mutlaka olmalı
 })
-export class AdminModule { }
+export class AdminModule {}

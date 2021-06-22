@@ -85,4 +85,25 @@ export class ArticleService {
     let api = `${this.apiUrl}/ArticleViewCountUp/${id}`;
     return this.apiClient.get(api);
   }
+  getArticlesWithoutPagination(){
+    let api=this.apiUrl
+
+    return this.apiClient.get<Article[]>(api);
+  }
+  addArticle(article: Article) {
+    return this.apiClient.post(this.apiUrl, article);
+  }
+  updateArticle(id: number, article: Article) {
+    return this.apiClient.put(`${this.apiUrl}/${id}`, article);
+  }
+
+  deleteArticle(id: number) {
+    return this.apiClient.delete(`${this.apiUrl}/${id}`);
+  }
+  saveArticlePicture(image : any) {
+    return this.apiClient.post<any>(
+      `${this.apiUrl}/SaveArticlePicture`,
+      image
+    );
+  }
 }
