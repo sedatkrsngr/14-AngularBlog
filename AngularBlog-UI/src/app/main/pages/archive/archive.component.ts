@@ -4,11 +4,11 @@ import { Article } from 'src/app/models/article';
 import { ArticleService } from 'src/app/services/article.service';
 
 @Component({
-  selector: 'app-category-articles',
-  templateUrl: './category-articles.component.html',
-  styleUrls: ['./category-articles.component.css'],
+  selector: 'app-archive',
+  templateUrl: './archive.component.html',
+  styleUrls: ['./archive.component.css'],
 })
-export class CategoryArticlesComponent implements OnInit, OnDestroy {
+export class ArchiveComponent implements OnInit, OnDestroy {
   //değişkenleri mutlaka varsayılan değerli başlangıçta vermeliyiz
   page: number = 1; //varsayılan değer
   pageSize: number = 5; //varsayılan değer
@@ -28,26 +28,28 @@ export class CategoryArticlesComponent implements OnInit, OnDestroy {
     //paramMap / olarak belirttiğimiz sayfaları dinler
     this.route.paramMap.subscribe((params) => {
       this.articleService.loading = true;
-      if (params.get('id')) {
-        this.categoryId = Number(params.get('id')); //url de id varsa categoryID ye ata
-      }
+      this.articles = [];
+      this.totalCount = 0;
+      let year = Number(params.get('year'));
+      let month = Number(params.get('month'));
+
       if (params.get('page')) {
         this.page = Number(params.get('page'));
       }
       if (this.totalCount > 0) {
         if (this.totalCount >= this.page * this.pageSize) {
           this.loadingItem = 5;
-        }
-        else{//2*5-8+1=3  ilk sayfa 5 2. sayfa 3
-          this.loadingItem=(this.page*this.pageSize)-this.totalCount+1;//bu şekilde tüm sayfalar dolduktan sonra en son sayfada kalacak olan data sayısını bilebilirim
+        } else {
+          //2*5-8+1=3  ilk sayfa 5 2. sayfa 3
+          this.loadingItem = this.page * this.pageSize - this.totalCount + 1; //bu şekilde tüm sayfalar dolduktan sonra en son sayfada kalacak olan data sayısını bilebilirim
         }
       }
-      this.articles = [];
-      this.totalCount = 0;
-      this.subscription=this.articleService.getArticlesWithCategory(this.categoryId,this.page,this.pageSize).subscribe((data) => {
-        this.articles = data.articles;
-        this.totalCount=data.totalCount;
-      });
+      this.subscription = this.articleService
+        .getArticleArchiveList(year, month, this.page, this.pageSize)
+        .subscribe((data) => {
+          this.articles = data.articles;
+          this.totalCount = data.totalCount;
+        });
     });
   }
 }

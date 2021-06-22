@@ -14,7 +14,8 @@ export class HeaderNavComponent implements OnInit {
   pageActive: MainPage = 0; //Başlangıç olarak enumda olmayan değer verdim.
 
   constructor(private router: Router) {
-    this.router.events.subscribe((x) => {//farklı bir sayfaya gittiğini yakalıyoruz burada
+    this.router.events.subscribe((x) => {
+      //farklı bir sayfaya gittiğini yakalıyoruz burada
       if (x instanceof NavigationEnd) {
         //gittiğimiz sayfanın adından pageActive doldurup main-nav html de active classını ekliyoruz
         if (x.url.indexOf('anasayfa') > 0) {
@@ -31,4 +32,12 @@ export class HeaderNavComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  search(searchText: string) {
+    if (searchText == '' || searchText == null || searchText == undefined) {
+
+    } else {
+      this.router.navigateByUrl(`arama/sayfa/1?s=${searchText}`);
+    } //Başlangıç olarak 1. sayfa görünsün
+  }
 }

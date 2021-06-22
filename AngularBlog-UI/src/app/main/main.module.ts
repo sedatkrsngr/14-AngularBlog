@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app-routing.module';
 import { ComponentModule } from '../components/component.module'; //bu module sayfalarımızda kullanıldığı için buraya ekliyoruz component.module->main.module->app.module
+import { MaterialModule } from '../modules/material/material.module';//materiali contect için kullanacağımızdan buraya eklemek mantıklı geldi. NErede kullanacaksak oranın modulüne ekleyebiliriz
 
 import { HomeComponent } from './pages/home/home.component';
 import { AboutMeComponent } from './pages/about-me/about-me.component';
@@ -12,8 +13,10 @@ import { MainLayoutComponent } from './layout/main-layout/main-layout.component'
 import { HeaderNavComponent } from './navigations/header-nav/header-nav.component';
 import { FooterNavComponent } from './navigations/footer-nav/footer-nav.component';
 import { ArticleComponent } from './pages/article/article.component';
-import { UrlFormatPipe } from '../pipes/url-format.pipe';
 import { CategoryArticlesComponent } from './pages/category-articles/category-articles.component';
+import { SearchComponent } from './pages/search/search.component';
+import { ArchiveComponent } from './pages/archive/archive.component';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,9 @@ import { CategoryArticlesComponent } from './pages/category-articles/category-ar
     HeaderNavComponent,
     FooterNavComponent,
     ArticleComponent,
-    CategoryArticlesComponent
+    CategoryArticlesComponent,
+    SearchComponent,
+    ArchiveComponent
   ],
   imports: [
     CommonModule,
@@ -32,6 +37,7 @@ import { CategoryArticlesComponent } from './pages/category-articles/category-ar
     AppRoutingModule,
     HttpClientModule,
     ComponentModule,
+    MaterialModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA], //html selector içerisinde custom tanımlar kullanıyorsak bunu eklemeliyiz. Öylesine ekledim şimdilik
 })
